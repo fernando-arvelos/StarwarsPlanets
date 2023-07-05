@@ -6,6 +6,7 @@ import PlanetContext from './PlanetContext';
 function PlanetProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredName, setFilteredName] = useState([]);
 
   useEffect(() => {
     const data = async () => {
@@ -18,8 +19,13 @@ function PlanetProvider({ children }) {
   }, []);
 
   const store = useMemo(
-    () => ({ planets, loading }),
-    [planets, loading],
+    () => ({
+      planets,
+      loading,
+      filteredName,
+      setFilteredName,
+    }),
+    [planets, loading, filteredName],
   );
 
   return (
