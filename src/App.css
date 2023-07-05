@@ -39,3 +39,13 @@
     transform: rotate(360deg);
   }
 }
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
