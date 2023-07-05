@@ -8,17 +8,18 @@ function App() {
 
   return (
     <div>
-      {loading 
-        ? <span>Loading...</span> 
-        : <div>
-          <table>
-            <thead>
-              <tr>
-                {titles.map((title) => <th key={ title }>{title}</th>)}
-              </tr>                
-            </thead>
-            <tbody>
-                {planets.map((planet) => 
+      {loading
+        ? <span>Loading...</span>
+        : (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  {titles.map((title) => <th key={ title }>{title}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {planets.map((planet) => (
                   <tr key={ planet.name }>
                     <td>{planet.name}</td>
                     <td>{planet.rotation_period}</td>
@@ -33,13 +34,10 @@ function App() {
                     <td>{planet.created}</td>
                     <td>{planet.edited}</td>
                     <td>{planet.url}</td>
-                
-                  </tr>
-                )}
-            </tbody>
-          </table>
-        </div>
-      }
+                  </tr>))}
+              </tbody>
+            </table>
+          </div>)}
     </div>
   );
 }
