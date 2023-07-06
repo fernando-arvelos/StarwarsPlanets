@@ -8,7 +8,6 @@ function PlanetProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [filteredName, setFilteredName] = useState([]);
   const [filteredNumber, setFilteredNumber] = useState([]);
-  console.log(filteredNumber);
 
   useEffect(() => {
     const data = async () => {
