@@ -7,6 +7,8 @@ function PlanetProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filteredName, setFilteredName] = useState([]);
+  const [filteredNumber, setFilteredNumber] = useState([]);
+  console.log(filteredNumber);
 
   useEffect(() => {
     const data = async () => {
@@ -23,9 +25,11 @@ function PlanetProvider({ children }) {
       planets,
       loading,
       filteredName,
+      filteredNumber,
+      setFilteredNumber,
       setFilteredName,
     }),
-    [planets, loading, filteredName],
+    [planets, loading, filteredName, filteredNumber],
   );
 
   return (
