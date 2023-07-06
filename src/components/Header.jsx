@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
+// import { BiSolidTrashAlt } from 'react-icons/bi';
 import PlanetContext from '../context/PlanetContext';
-import useOptions from '../hooks/useOptions';
 import useFormInput from '../hooks/useFormInput';
 import useFilterNumeric from '../hooks/useFilterNumeric';
 
 function Header() {
-  const { planets, setFilteredName } = useContext(PlanetContext);
-  const { options } = useOptions();
+  const { planets,
+    setFilteredName,
+    options,
+    filterByNumericValues,
+  } = useContext(PlanetContext);
   const [isLoading, setIsLoading] = useState(true);
-  const columnFilter = useFormInput('population');
+  const columnFilter = useFormInput(options[0]);
   const comparisonFilter = useFormInput('maior que');
   const valueFilter = useFormInput(0);
   const buttonFilter = useFilterNumeric(
@@ -17,9 +20,11 @@ function Header() {
     valueFilter.value,
   );
 
+  const { setValue } = columnFilter;
   useEffect(() => {
     setIsLoading(false);
-  }, [options]);
+    setValue(options[0]);
+  }, [options, setValue]);
 
   const handleFilter = ({ target }) => {
     const { value } = target;
@@ -27,6 +32,7 @@ function Header() {
       .toLowerCase().includes(value.toLowerCase()));
     setFilteredName(filter);
   };
+  console.log(columnFilter.value);
 
   return (
     <>
@@ -75,11 +81,26 @@ function Header() {
         <button
           type="button"
           data-testid="button-filter"
+          disabled={ options.length === 0 }
           onClick={ buttonFilter.onclick }
         >
           Filtrar
         </button>
-        <div />
+      </div>
+      <div>
+        {filterByNumericValues.length > 0
+        && filterByNumericValues.map((filter) => (
+          <div key={ filter.column }>
+            <span>{`${filter.column} `}</span>
+            <span>{`${filter.comparison} `}</span>
+            <span>{filter.value}</span>
+            <button
+              type="button"
+            >
+              X
+            </button>
+          </div>
+        ))}
       </div>
     </>
   );

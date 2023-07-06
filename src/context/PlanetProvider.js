@@ -6,8 +6,11 @@ import PlanetContext from './PlanetContext';
 function PlanetProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [options, setOptions] = useState(['population', 'rotation_period',
+    'orbital_period', 'diameter', 'surface_water']);
   const [filteredName, setFilteredName] = useState([]);
   const [filteredNumber, setFilteredNumber] = useState([]);
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
 
   useEffect(() => {
     const data = async () => {
@@ -23,12 +26,22 @@ function PlanetProvider({ children }) {
     () => ({
       planets,
       loading,
+      options,
       filteredName,
       filteredNumber,
+      filterByNumericValues,
       setFilteredNumber,
       setFilteredName,
+      setFilterByNumericValues,
+      setOptions,
     }),
-    [planets, loading, filteredName, filteredNumber],
+    [planets,
+      loading,
+      options,
+      filteredName,
+      filteredNumber,
+      filterByNumericValues,
+    ],
   );
 
   return (

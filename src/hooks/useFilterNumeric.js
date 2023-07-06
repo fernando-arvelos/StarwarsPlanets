@@ -2,7 +2,14 @@ import { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function useFilterNumeric(column, comparison, value) {
-  const { planets, filteredNumber, setFilteredNumber } = useContext(PlanetContext);
+  const { planets,
+    filteredNumber,
+    setFilteredNumber,
+    filterByNumericValues,
+    setFilterByNumericValues,
+    options,
+    setOptions,
+  } = useContext(PlanetContext);
 
   const handleClick = () => {
     const array = filteredNumber.length > 0 ? filteredNumber : planets;
@@ -19,6 +26,16 @@ function useFilterNumeric(column, comparison, value) {
       const filter = array.filter((planet) => Number(planet[column]) === Number(value));
       setFilteredNumber(filter);
     }
+
+    const newFilterByNumericValues = {
+      column,
+      comparison,
+      value,
+    };
+    setFilterByNumericValues([...filterByNumericValues, newFilterByNumericValues]);
+
+    const usedColumn = options.filter((option) => option !== column);
+    setOptions(usedColumn);
   };
 
   return {
