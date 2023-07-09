@@ -1,24 +1,16 @@
-import React, { useContext } from 'react';
 import './App.css';
-import Header from './components/Header';
+import Provider from './context/Provider';
 import Table from './components/Table';
-import PlanetContext from './context/PlanetContext';
+import Header from './components/Header';
 
 function App() {
-  const { loading } = useContext(PlanetContext);
-
   return (
-    <div>
-      <h1>Star Wars Planets</h1>
-      {loading
-        ? <span>Loading...</span>
-        : (
-          <div>
-            <Header />
-            <Table />
-          </div>
-        )}
-    </div>
+    <Provider>
+      <div>
+        <Header />
+        <Table />
+      </div>
+    </Provider>
   );
 }
 
